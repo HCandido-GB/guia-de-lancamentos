@@ -73,8 +73,25 @@ h2 .ico{color:var(--bege);font-size:22px}
 .cp.ok{background:var(--ok-bg);color:var(--ok);border-color:var(--ok-bg)}
 .cp:focus-visible{outline:3px solid var(--vinho-2);outline-offset:2px}
 
+body{min-height:100vh;display:flex;flex-direction:column}
+main.wrap{flex:1;width:100%}
+.home .hero{padding-block:30px 6px}
+.choices{display:grid;gap:14px;margin-block:22px 36px}
+.choice{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:center;padding:22px 20px;border-radius:20px;background:var(--vinho);color:#fff;text-decoration:none;box-shadow:0 8px 22px rgba(70,13,58,.18);transition:transform .15s}
+.choice.c2{background:var(--vinho-2)}
+.choice:active{transform:scale(.98)}
+.choice .ib{background:rgba(255,255,255,.16);color:#fff}
+.choice .ct b{display:block;font-size:21px;line-height:1.2}
+.choice .ct span{display:block;font-size:15px;line-height:1.4;color:#EADCE5;margin-top:4px}
+.choice .go{font-size:24px;color:#E6D3C2}
+.toolhead{padding-block:16px 10px}
+.back{display:inline-flex;align-items:center;gap:4px;font-size:15px;font-weight:700;color:var(--vinho);text-decoration:none;padding:6px 10px 6px 4px;border-radius:10px;margin-left:-4px}
+.back:hover{background:var(--vinho-tint)}
+.toolhead h1{margin:6px 0 0;font-size:clamp(26px,6.5vw,34px);line-height:1.15;color:var(--vinho)}
 .areas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.area{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:36px 1fr auto;gap:0 10px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:10px 12px;background:#fff}
+@media (max-width:520px){.areas{grid-template-columns:1fr}}
+.area>span:nth-child(2){min-width:0}
+.area{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:0 10px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:10px 12px;background:#fff}
 .area .ib{width:36px;height:36px;font-size:18px}
 .area b{display:block;font-size:15px;color:var(--vinho);line-height:1.2}
 .area small{font-size:12px;color:var(--bege);font-weight:700}
@@ -187,19 +204,22 @@ footer small{display:block;font-weight:400;color:#E6D3C2}
 </header>
 
 <main class="wrap">
-  <div class="hero">
-    <small>Consulta do dia a dia</small>
-    <h1>Guia de Lançamentos</h1>
-    <p>Encontre o centro de custo certo e descubra se uma compra é Imobilizado ou Estoque antes de lançar.</p>
-  </div>
-
-  <div class="tabs" role="tablist" aria-label="Ferramentas">
-    <button class="tab" role="tab" id="t-cc" aria-controls="centro-de-custo" aria-selected="true" data-view="centro-de-custo"><svg class="ico"><use href="#i-search"/></svg>Qual centro de custo?</button>
-    <button class="tab" role="tab" id="t-im" aria-controls="imobilizado" aria-selected="false" data-view="imobilizado"><svg class="ico"><use href="#i-factory"/></svg>Imobilizado ou Estoque?</button>
-  </div>
+  <!-- INÍCIO -->
+  <section id="inicio" class="home">
+    <div class="hero">
+      <small>Consulta do dia a dia</small>
+      <h1>Guia de Lançamentos</h1>
+      <p>Escolha o que você precisa consultar.</p>
+    </div>
+    <nav class="choices" aria-label="Ferramentas">
+      <a class="choice" href="#centro-de-custo"><span class="ib lg"><svg class="ico"><use href="#i-search"/></svg></span><span class="ct"><b>Qual centro de custo?</b><span>Busque pelo setor e copie o código analítico certo.</span></span><svg class="ico go"><use href="#i-chev"/></svg></a>
+      <a class="choice c2" href="#imobilizado"><span class="ib lg"><svg class="ico"><use href="#i-factory"/></svg></span><span class="ct"><b>Imobilizado ou Estoque?</b><span>Responda a três perguntas e veja como classificar a compra.</span></span><svg class="ico go"><use href="#i-chev"/></svg></a>
+    </nav>
+  </section>
 
   <!-- FERRAMENTA 1 -->
-  <section class="tool" id="centro-de-custo" role="tabpanel" aria-labelledby="t-cc">
+  <section class="tool" id="centro-de-custo" hidden>
+    <div class="toolhead"><a class="back" href="#inicio"><svg class="ico" style="transform:rotate(180deg)"><use href="#i-chev"/></svg>Início</a><h1>Qual centro de custo?</h1></div>
     <div class="lead"><span class="ib v"><svg class="ico"><use href="#i-target"/></svg></span><p>O custo pertence à <em>área que consome</em> o item, e não a quem comprou, pagou, executou ou guardou.</p></div>
 
     <div class="sin"><svg class="ico"><use href="#i-search"/></svg><input id="busca" type="search" placeholder="Nome do setor ou parte do código" aria-label="Buscar centro de custo" autocomplete="off"></div>
@@ -223,7 +243,8 @@ footer small{display:block;font-weight:400;color:#E6D3C2}
   </section>
 
   <!-- FERRAMENTA 2 -->
-  <section class="tool" id="imobilizado" role="tabpanel" aria-labelledby="t-im" hidden>
+  <section class="tool" id="imobilizado" hidden>
+    <div class="toolhead"><a class="back" href="#inicio"><svg class="ico" style="transform:rotate(180deg)"><use href="#i-chev"/></svg>Início</a><h1>Imobilizado ou Estoque?</h1></div>
     <div class="sim" id="sim">
       <div class="head"><span class="ib v" id="simIb"><svg class="ico"><use id="simIcon" href="#i-clipboard"/></svg></span><span class="step" id="simStep"></span><span class="dots" id="dots"><i></i><i></i><i></i></span></div>
       <p class="qq" id="simQ"></p>
@@ -276,16 +297,13 @@ footer small{display:block;font-weight:400;color:#E6D3C2}
   function esc(s){return s.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
   function ico(id){return '<svg class="ico"><use href="#'+id+'"/></svg>'}
 
-  /* abas com endereço (#centro-de-custo / #imobilizado) */
-  var views=['centro-de-custo','imobilizado'];
+  /* telas com endereço: #inicio, #centro-de-custo, #imobilizado */
+  var views=['inicio','centro-de-custo','imobilizado'];
   function show(v){
-    if(views.indexOf(v)<0) v=views[0];
+    if(views.indexOf(v)<0) v='inicio';
     views.forEach(function(x){ document.getElementById(x).hidden=(x!==v); });
-    [].forEach.call(document.querySelectorAll('.tab'),function(t){ t.setAttribute('aria-selected', t.dataset.view===v?'true':'false'); });
+    window.scrollTo(0,0); setTimeout(function(){ window.scrollTo(0,0); },30);
   }
-  [].forEach.call(document.querySelectorAll('.tab'),function(t){
-    t.addEventListener('click',function(){ if(location.hash!=='#'+t.dataset.view) location.hash=t.dataset.view; else show(t.dataset.view); });
-  });
   window.addEventListener('hashchange',function(){ show(location.hash.slice(1)); });
   show(location.hash.slice(1));
 
