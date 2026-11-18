@@ -73,10 +73,12 @@ h2 .ico{color:var(--bege);font-size:22px}
 .cp.ok{background:var(--ok-bg);color:var(--ok);border-color:var(--ok-bg)}
 .cp:focus-visible{outline:3px solid var(--vinho-2);outline-offset:2px}
 
-body{min-height:100vh;display:flex;flex-direction:column}
-main.wrap{flex:1;width:100%}
-.home .hero{padding-block:30px 6px}
-.choices{display:grid;gap:14px;margin-block:22px 36px}
+body{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
+main.wrap{flex:1;width:100%;display:flex;flex-direction:column}
+.home{flex:1;display:flex;flex-direction:column;justify-content:center;padding-block:24px}
+.home .hero{padding-block:0;text-align:center}
+.home .hero p{margin-inline:auto}
+.choices{display:grid;gap:14px;margin-block:24px 0;width:100%;max-width:520px;margin-inline:auto}
 .choice{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:center;padding:22px 20px;border-radius:20px;background:var(--vinho);color:#fff;text-decoration:none;box-shadow:0 8px 22px rgba(70,13,58,.18);transition:transform .15s}
 .choice.c2{background:var(--vinho-2)}
 .choice:active{transform:scale(.98)}
